@@ -1,0 +1,31 @@
+openapi: 3.1.0
+
+info:
+  title: imz API
+  description: imz api specification
+  version: "0.1"
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: https://sh.yashikota.com/api
+    description: prd
+
+tags:
+  - name: photo
+    description: Photo API
+
+paths:
+  /v1/photos:
+    $ref: "paths/v1_photos.yaml"
+  /v1/photos/{id}:
+    $ref: "paths/v1_photos_{id}.yaml"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      description: Session token for API
+      scheme: bearer
+      bearerFormat: JWT

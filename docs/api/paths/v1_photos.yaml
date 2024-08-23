@@ -1,0 +1,115 @@
+get:
+  summary: Get photos
+  description: Get photos from the server with pagination
+  operationId: getPhotos
+  security:
+   - BearerAuth: []
+  tags:
+    -  photo
+  parameters:
+    - name: limit
+      in: query
+      description: Number of photos to return
+      required: true
+      schema:
+        type: integer
+        format: int32
+        example: 10
+    - name: cursor
+      in: query
+      description: Cursor for pagination
+      required: false
+      schema:
+        type: string
+        example: "eyJpZCI6I"
+  responses:
+    "200":
+      description: A list of photos
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "../schemas/Photo.yaml"
+              cursor:
+                type: object
+                properties:
+                  next_cursor:
+                    type: string
+                    example: lusjdfau
+                  has_more:
+                    type: boolean
+                    example: true
+    "400":
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+          example:
+            message: "Bad request"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+          example:
+            message: "Internal server error"
+    default:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+
+post:
+  summary: Upload a new photo
+  description: Upload a new photo to the server
+  operationId: postPhoto
+  security:
+   - BearerAuth: []
+  tags:
+    -  photo
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            file:
+              type: string
+              format: binary
+  responses:
+    "200":
+      description: A photo
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Photo.yaml"
+    "400":
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+          example:
+            message: "Bad request"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+          example:
+            message: "Internal server error"
+    default:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"

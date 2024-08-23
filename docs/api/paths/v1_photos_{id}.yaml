@@ -1,0 +1,89 @@
+get:
+  summary: Get photo
+  description: Get a photo from the server by ID
+  operationId: getPhoto
+  security:
+   - BearerAuth: []
+  tags:
+    -  photo
+  parameters:
+    - name: id
+      in: path
+      description: ID of the photo to get
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: "123e4567a456426614174000"
+  responses:
+    "200":
+      description: A photo
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Photo.yaml"
+    "400":
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+          example:
+            message: "Bad request"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+          example:
+            message: "Internal server error"
+    default:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+
+delete:
+  summary: Delete photo
+  description: Delete a photo from the server
+  operationId: deletePhoto
+  security:
+   - BearerAuth: []
+  tags:
+    -  photo
+  parameters:
+    - name: id
+      in: path
+      description: ID of the photo to delete
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: "123e4567a456426614174000"
+  responses:
+    "204":
+      description: No content
+    "400":
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+          example:
+            message: "Bad request"
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"
+          example:
+            message: "Internal server error"
+    default:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Error.yaml"

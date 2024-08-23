@@ -1,0 +1,13 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    example: "123e4567a456426614174000"
+  url:
+    type: string
+    example: "https://example.com/photo.jpg"
+  createdAt:
+    type: string
+    format: date-time
+    example: "2022-01-01T00:00:00Z"
